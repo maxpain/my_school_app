@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  database: myschool_dev
+  pool: 5
+  username: postgres
+  password: 

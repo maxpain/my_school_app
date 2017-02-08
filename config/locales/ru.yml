@@ -1,0 +1,61 @@
+ru:
+  activerecord:
+    models:
+      subject:
+        one: 'Предмет'
+        few: 'Предметов'
+        many: 'Предметы'
+        other: 'Предметы'
+      grade:
+        one: 'Класс'
+        few: 'Классов'
+        many: 'Классы'
+        other: 'Классы'
+      teacher:
+        one: 'Учитель'
+        few: 'Учителей'
+        many: 'Учителя'
+        other: 'Учителя'
+      parent:
+        one: 'Родитель'
+        few: 'Родителей'
+        many: 'Родителя'
+        other: 'Родители'
+      pupil:
+        one: 'Ученик'
+        few: 'Учеников'
+        many: 'Ученика'
+        other: 'Ученики'
+
+
+    attributes:
+      subject:
+        name: 'Название'
+        created_at: 'Дата создания'
+        updated_at: 'Дата изменения'
+      grade:
+        name: 'Название'
+        comment: 'Комментарий'
+        created_at: 'Дата создания'
+        updated_at: 'Дата изменения'
+      teacher:
+        fio: 'ФИО'
+        gender: 'Пол'
+        phone: 'Телефон'
+        address: 'Адрес'
+        birthdate: 'Дата рождения'
+        email: 'email'
+      parent:
+        fio: 'ФИО'
+        gender: 'Пол'
+        phone: 'Телефон'
+        address: 'Адрес'
+        birthdate: 'Дата рождения'
+        email: 'email'
+      pupil:
+        fio: 'ФИО'
+        gender: 'Пол'
+        phone: 'Телефон'
+        address: 'Адрес'
+        birthdate: 'Дата рождения'
+        email: 'email'
