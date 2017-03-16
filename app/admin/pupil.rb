@@ -24,7 +24,7 @@ index do
       f.input :phone
       f.input :email
       f.input :password
-      f.input :grade_id
+      f.input :grade_id, as: :select, collection: Grade.all.pluck(:name)
     end
 
     actions

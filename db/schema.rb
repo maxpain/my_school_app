@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116192835) do
+ActiveRecord::Schema.define(version: 20170316205928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,24 @@ ActiveRecord::Schema.define(version: 20161116192835) do
   create_table "grades", force: :cascade do |t|
     t.string   "name"
     t.integer  "teacher_id"
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pupil_subjects", force: :cascade do |t|
+    t.integer  "pupil_id"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pupil_id", "subject_id"], name: "index_pupil_subjects_on_pupil_id_and_subject_id", using: :btree
+  end
+
+  create_table "subject_scores", force: :cascade do |t|
+    t.integer  "pupil_id"
+    t.integer  "subject_id"
+    t.integer  "teacher_id"
+    t.integer  "value"
     t.string   "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,17 +1,14 @@
 ActiveAdmin.register Teacher do
   permit_params :fio, :birthdate, :gender, :address, :phone, :email, :password
 
-
-
-index do
+  index do
     column :fio
     column :birthdate
     column :gender
     column :address
     column :phone
     column :email
-   # column :encrypted_password
-   column :password
+    column :password
     actions
   end
 
