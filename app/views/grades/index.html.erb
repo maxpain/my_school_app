@@ -1,0 +1,46 @@
+<h1>Список классов</h1>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= link_to 'Название', grades_path(iluha: :name) %></th>
+      <th><%= link_to 'Комментарий', grades_path(iluha: :comment)%></th>
+      <th><%= link_to 'Руководитель', grades_path(iluha: :teacher_id)%></th>
+      <% if user_signed_in? %>
+        <th></th>
+      <% end %>
+        <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <th>Количество</th>
+        <% end %>
+        <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @grades.each do |grade| %>
+      <tr>
+        <td><%= link_to grade.name, grade_path(grade) %></td>
+        <td><%= grade.comment[0..100] + '...' %></td>
+
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Редактировать', edit_grade_path(grade), class: 'btn btn-primary btn-sm' %><br>
+            <br>
+              <%= link_to 'Удалить', grade, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to 'Добавить класс', new_grade_path, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
