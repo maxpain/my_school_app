@@ -19,7 +19,7 @@ index do
     inputs 'Новый ученик' do
       f.input :fio
       f.input :birthdate
-      f.input :gender
+      f.input :gender, as: :select, collection: ["Male", "Female"]
       f.input :address
       f.input :phone
       f.input :email
