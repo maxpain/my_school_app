@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :fio, :birthdate, :gender, :address, :email, :phone, :role
+  permit_params :fio, :birthdate, :gender, :address, :email, :phone, :role, :type
 
 index do
     column :fio
@@ -9,7 +9,7 @@ index do
     column :email
     column :phone
     column :role
-    #column :encrypted_password
+    column :type
     actions
   end
 
@@ -23,7 +23,6 @@ index do
       f.input :phone
       f.input :password
       f.input :role, as: :select, collection: [['User', :user], ['Admin', :admin]], include_blank: false
-     # f.input :encrypted_password
     end
     actions
   end

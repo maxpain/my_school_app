@@ -11,7 +11,7 @@ index do
     column :phone
     column :email
     column :password
-    column :drade_id
+    column :grade_id
     actions
   end
 
@@ -19,12 +19,13 @@ index do
     inputs 'Новый ученик' do
       f.input :fio
       f.input :birthdate
-      f.input :gender, as: :select, collection: ["Male", "Female"]
+      f.input :gender, as: :select, collection: [["Male", :male], ["Female", :female]], include_blank: false
       f.input :address
       f.input :phone
       f.input :email
       f.input :password
-      f.input :grade_id, as: :select, collection: Grade.all.pluck(:name)
+      #f.input :grade_id, as: :select, collection: Grade.all.pluck(:name)
+      f.input :grade_id, as: :select, collection: Grade.all.map{|u| ["#{u.name}", u.id]}, include_blank: false
     end
 
     actions

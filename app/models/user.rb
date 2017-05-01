@@ -8,15 +8,15 @@ class User < ApplicationRecord
   enum gender: [:male, :female]
 
   before_create :set_role
-  #before_create :set_geder
+  before_create :set_gender
 
   def set_role
     self.role = :user
   end
 
-  #def set_gender
-  #  self.gender = :male
-  #end
+  def set_gender
+    self.gender = :male
+  end
 
 
 end

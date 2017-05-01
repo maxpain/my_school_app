@@ -4,19 +4,19 @@
   <h1><%= @grade.name %></h1>
 </p>
 
+<p>
+  <strong>Классный руководитель:</strong>
+  <%= Teacher.find(@grade.teacher_id).fio %>
+</p>
+
 <div class="col-xs-8">
   <p>
+    <strong>Примечание</strong>
     <%= @grade.comment %>
   </p>
 </div>
 
-<p>
-  <strong>Классный руководитель:</strong>
-  <%= @grade.teacher_id %>
-</p>
-
-
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
     <% if current_user.admin? %>
       <%= link_to 'Редактировать', edit_grade_path(@grade) %>
     <%end%>

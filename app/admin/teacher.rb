@@ -16,12 +16,11 @@ ActiveAdmin.register Teacher do
     inputs 'Новый учитель' do
       f.input :fio
       f.input :birthdate
-      f.input :gender
+      f.input :gender, as: :select, collection: [["Male", :male], ["Female", :female]], include_blank: false
       f.input :address
       f.input :phone
       f.input :email
-     # f.input :encrypted_password
-     f.input :password
+      f.input :password
     end
 
     actions
