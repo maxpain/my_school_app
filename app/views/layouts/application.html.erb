@@ -45,7 +45,7 @@
           Вы вошли как <%=link_to current_user.email, root_path %>
           <%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to 'Войти', user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>  <!-- registration_path -->
+          <%= link_to 'Войти', user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
         <% end %>
       </li>
     </ul>

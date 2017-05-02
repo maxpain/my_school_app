@@ -16,7 +16,7 @@ index do
   form do |f|
     inputs 'Новый родитель' do
       f.input :fio
-      f.input :birthdate
+      f.input :birthdate, as: :datepicker, datepicker_options: { min_date: "1980-10-8", max_date: "+3D" }
       f.input :gender
       f.input :address
       f.input :phone

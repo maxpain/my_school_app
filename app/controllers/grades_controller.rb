@@ -7,6 +7,7 @@ class GradesController < ApplicationController
 
   def show
     @grade = Grade.find(params[:id])
+    @pupils = Pupil.where(grade_id: @grade)
   end
 
   def new

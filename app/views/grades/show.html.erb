@@ -16,6 +16,44 @@
   </p>
 </div>
 
+
+<h2>Список учеников</h2>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th><%= link_to 'ФИО', grades_path(iluha: :fio) %></th>
+      <th><%= link_to 'email', grades_path(iluha: :email)%></th>
+      <th><%= link_to 'Родитель', grades_path(iluha: :parent_id)%></th>
+      <% if user_signed_in? %>
+        <th></th>
+      <% end %>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pupils.each do |pupil| %>
+      <tr>
+        <td><%= link_to pupil.fio, pupil_path(pupil) %></td>
+        <td><%= pupil.email %></td>
+        <td><%= Parent.find(pupil.parent_id).fio %></td>
+
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Редактировать', edit_pupil_path(pupil), class: 'btn btn-primary btn-sm' %><br>
+            <br>
+              <%= link_to 'Удалить', pupil, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
 <% if user_signed_in? %>
     <% if current_user.admin? %>
       <%= link_to 'Редактировать', edit_grade_path(@grade) %>

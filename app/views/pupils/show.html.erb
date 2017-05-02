@@ -1,0 +1,56 @@
+<p id="notice">
+
+<p>
+  <h1><%= @pupil.fio %></h1>
+</p>
+
+<p>
+  <strong>Родитель:</strong>
+  <%= Parent.find(@pupil.parent_id).fio %>
+</p>
+
+<div class="col-xs-8">
+  <p>
+    <strong>Класс</strong>
+    <%= Grade.find(@pupil.grade_id).name %>
+  </p>
+</div>
+
+<h2>Предметы</h2>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th><%= link_to 'Название', grades_path(iluha: :fio) %></th>
+      <% if user_signed_in? %>
+        <th></th>
+      <% end %>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subject_scores.each do |subject_score| %>
+      <tr>
+        <td><%= link_to subject_score.name, subject_path(subject_score) %></td>
+
+
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Редактировать', edit_subject_score_path(subject_score), class: 'btn btn-primary btn-sm' %><br>
+            <br>
+              <%= link_to 'Удалить', subject_score, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= link_to 'Редактировать', edit_pupil_path(@pupil) %>
+    <%end%>
+  <%end%>
+<%= link_to 'Назад', grade_path(@pupil.grade_id) %>
