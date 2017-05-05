@@ -8,7 +8,7 @@ class PupilsController < ApplicationController
 
   def show
     @pupil = Pupil.find(params[:id])
-    @subject_scores = Subject::Score.where(pupil_id: @pupil)
+    #@subject_scores = Subject::Score.where(pupil_id: @pupil)
   end
 
   def new

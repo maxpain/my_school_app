@@ -30,7 +30,7 @@
   </thead>
 
   <tbody>
-    <% @subject_scores.each do |subject_score| %>
+    <% @scores.each do |subject_score| %>
       <tr>
         <td><%= link_to subject_score.name, subject_path(subject_score) %></td>
 
@@ -38,6 +38,7 @@
         <% if user_signed_in? %>
           <% if current_user.admin? %>
             <td><%= link_to 'Редактировать', edit_subject_score_path(subject_score), class: 'btn btn-primary btn-sm' %><br>
+
             <br>
               <%= link_to 'Удалить', subject_score, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
             </td>

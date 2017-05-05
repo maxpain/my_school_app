@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Список чеков</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%='Номер заказа'%></th>
+      <th><%='Статус'%></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><% if order.paid? %>
+            Оплачено
+            <% end %>
+           <% if order.cart? %>
+            Не подтверждено
+          <% end %></td>
+        <td><%= link_to 'Открыть', order_path(order), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Удалить', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'На главную', root_path, class: 'btn btn-primary' %>

@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <title>SmartSchool</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
@@ -30,6 +35,12 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/grades">Классы</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/products">Касса</a>
+      </li>
+       <li class="nav-item active">
+        <a class="nav-link" href="/orders">Чеки</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -60,11 +71,23 @@
   </div>
 </nav>
 
-<div class="row justify-content-center">
-    <div class="col col-lg-10">
-     <%= yield %>
-    </div>
-</div>
+  <div class="container content">
+    <div class="row">
+      <div class="col-lg-9">
+        <!--  <%= bootstrap_flash %>   /row-->
+        <%= yield %>
+      </div>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <div class="col-lg-3">
+            <div class="well sidebar-nav">
+              <h3>Корзина</h3>
+              <%= render 'shared/cart' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div><!--/row-->
 
 
 <!--

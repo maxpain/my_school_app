@@ -1,0 +1,24 @@
+<p id="notice">
+
+<p>
+  <h1><%= @product.title %></h1>
+</p>
+
+<div class="col-xs-8">
+  <p>
+    <%= @product.description %>
+  </p>
+</div>
+
+<p>
+  <strong>Цена:</strong>
+  <%= @product.price %>
+</p>
+
+
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= link_to 'Редактировать', edit_product_path(@product) %>
+    <%end%>
+  <%end%>
+<%= link_to 'Назад', products_path %>

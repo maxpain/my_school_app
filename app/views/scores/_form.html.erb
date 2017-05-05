@@ -1,0 +1,27 @@
+<%= form_for @subject_score, multipart: true do |f| %>
+  <% if @subject_score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subject_score.errors.count, "error") %> prohibited this subject_score from being saved:</h2>
+
+      <ul>
+      <% @subject_score.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <strong>Предмет</strong>
+    <%= f.select(:grade_id, options_from_collection_for_select(Grade.all, :name), {}, {:class => 'form-control'}) %>
+  </div><br>
+  <div class="field">
+    <strong>Руководитель</strong>
+    <%= f.select(:teacher_id, options_from_collection_for_select(Teacher.all, :id, :fio), {}, {:class => 'form-control'}) %>
+  </div><br>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
