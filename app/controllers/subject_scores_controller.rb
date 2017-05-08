@@ -8,9 +8,9 @@ class Subject::ScoresController < ApplicationController
   #  @score = Subject::Score.find(params[:id])
   #end
 
-  #def new
-  #  @score = Subject::Score.new
-  #end
+  def new
+    @score = Subject::Score.new
+  end
 
 
   #def create
@@ -23,8 +23,8 @@ class Subject::ScoresController < ApplicationController
   #  @score = Subject::Score.find(params[:id])
   #end
 
-  #def grade_params
-  #  params.require(:score).permit(:grade_id, :teacher_id)
-  #end
+  def grade_params
+    params.require(:score).permit(:grade_id, :teacher_id)
+  end
 
 end
