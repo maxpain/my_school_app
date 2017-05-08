@@ -39,6 +39,8 @@ gem 'pundit'
 gem 'russian'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

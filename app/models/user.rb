@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
   		 :rememberable, :trackable, :validatable
 
+  geocoded_by :address
+  after_validation :geocode
+
   enum role: [:user, :admin]
   enum gender: [:male, :female]
 

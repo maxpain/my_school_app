@@ -23,7 +23,7 @@ class PupilsController < ApplicationController
 
     respond_to do |format|
       if @pupil.save
-        format.html { redirect_to @pupil, notice: 'Product was successfully created.' }
+        format.html { redirect_to @pupil, notice: 'Новый ученик успешно создан' }
         format.json { render :show, status: :created, location: @pupil }
       else
         format.html { render :new }
@@ -35,7 +35,7 @@ class PupilsController < ApplicationController
   def update
     respond_to do |format|
       if @pupil.update(grade_params)
-        format.html { redirect_to @pupil, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @pupil, notice: 'Информация об ученике обновлена' }
         format.json { render :show, status: :ok, location: @pupil }
       else
         format.html { render :edit }

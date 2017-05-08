@@ -1,7 +1,5 @@
 ActiveAdmin.register Pupil do
-  permit_params :fio, :birthdate, :gender, :address, :phone, :email, :password, :grade_id, :parent_id
-
-
+  permit_params :fio, :birthdate, :gender, :address, :phone, :email, :password, :grade_id, :parent_id, :latitude, :longitude
 
 index do
     column :fio
@@ -11,6 +9,8 @@ index do
     column :email
     column :grade_id
     column :parent_id
+    column :latitude
+    column :longitude
     actions
   end
 
@@ -26,6 +26,8 @@ index do
       #f.input :grade_id, as: :select, collection: Grade.all.pluck(:name)
       f.input :grade_id, as: :select, collection: Grade.all.map{|u| ["#{u.name}", u.id]}, include_blank: false
       f.input :parent_id, as: :select, collection: Parent.all.map{|u| ["#{u.email}, #{u.fio}", u.id]}, include_blank: false
+      f.input :latitude
+      f.input :longitude
     end
 
     actions

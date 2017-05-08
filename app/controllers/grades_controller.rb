@@ -8,6 +8,14 @@ class GradesController < ApplicationController
   def show
     @grade = Grade.find(params[:id])
     @pupils = Pupil.where(grade_id: @grade)
+
+    @pupils = Pupil.order(params[:iluha])
+    @hash = Gmaps4rails.build_markers(@pupils) do |pupil, marker|
+      marker.lat pupil.latitude
+      marker.lng pupil.longitude
+      marker.infowindow pupil.fio + " , " + pupil.address
+    end
+
   end
 
   def new
