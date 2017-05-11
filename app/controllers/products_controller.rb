@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
  #     @search = Log.ransack(params[:log_search], search_key: :log_search)
 
     @search = Product.search(params[:q])
-    @products = @search.result(distinct: true).page(params[:page]).per(3)
+    @products = @search.result(distinct: true).page(params[:page]).per(5)
 
 
   end

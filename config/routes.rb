@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :products
   ActiveAdmin.routes(self)
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_for :users
 
   #devise_scope :user do
   #   get '/users/sign_out' => 'devise/sessions#destroy'
@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   root 'application#index'
   resources :grades
   resources :pupils
-  resources :subject_scores
+
+  scope module: :subject do
+    resources :scores
+  end
 
   resources :line_items, only: [:create, :update, :destroy] do
     get 'destroy_all', on: :collection
@@ -23,6 +26,8 @@ Rails.application.routes.draw do
       get :close_current
     end
   end
+
+  resource :geolocations, only: :update
 
   get 'send_items/send_items'
 

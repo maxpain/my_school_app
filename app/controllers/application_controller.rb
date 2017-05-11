@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   #def after_sign_in_path_for(resource)
   #  persons_profile_path
   #end
@@ -12,6 +11,19 @@ class ApplicationController < ActionController::Base
   prepend_before_action :check_current_order
 
   helper_method :current_order
+
+  def access_denied(exception)
+    redirect_to '/', alert: exception.message
+  end
+
+  def index
+    @pupils = Pupil.where.not(currentlongitude: nil)
+    @hash = Gmaps4rails.build_markers(@pupils) do |pupil, marker|
+        marker.lat pupil.currentlatitude
+        marker.lng pupil.currentlongitude
+        marker.infowindow pupil.fio
+      end
+  end
 
   private
 

@@ -9,7 +9,7 @@ class Subject::ScoresController < ApplicationController
   #end
 
   def new
-    @score = Subject::Score.new
+    @subject_score = Subject::Score.new
   end
 
 

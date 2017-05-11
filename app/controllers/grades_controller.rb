@@ -2,7 +2,7 @@ class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
 
   def index
-      @grades = Grade.order(params[:iluha])
+    @grades = Grade.order(params[:iluha])
   end
 
   def show

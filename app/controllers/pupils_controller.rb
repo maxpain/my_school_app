@@ -3,7 +3,7 @@ class PupilsController < ApplicationController
   before_action :set_pupil, only: [:show, :edit, :update, :destroy]
 
   def index
-      @pupils = Pupil.order(params[:iluha])
+    @pupils = Pupil.order(params[:iluha])
   end
 
   def show

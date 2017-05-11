@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :fio, :birthdate, :gender, :address, :email, :phone, :role, :type
+  permit_params :fio, :birthdate, :gender, :address, :email, :phone, :role, :type, :currentlatitude, :currentlongitude
 
 index do
     column :fio
@@ -10,6 +10,7 @@ index do
     column :phone
     column :role
     column :type
+    column :currentlatitude
     actions
   end
 
@@ -23,6 +24,10 @@ index do
       f.input :phone
       f.input :password
       f.input :role, as: :select, collection: [['User', :user], ['Admin', :admin]], include_blank: false
+     # f.input :type, as: :select, collection: [['Pupil', :pupil], ['Teacher', :teacher], ['Parent', :parent]], include_blank: false
+      f.input :currentlatitude
+      f.input :currentlongitude
+
     end
     actions
   end

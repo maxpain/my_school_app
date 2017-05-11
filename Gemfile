@@ -30,14 +30,12 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootstrap-sass', '~> 3.3.7'
 gem 'simple_form'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'pundit'
 gem 'russian'
-gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
 gem 'geocoder'
 gem 'gmaps4rails'
