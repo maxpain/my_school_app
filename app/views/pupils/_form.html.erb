@@ -1,8 +1,7 @@
-<%= form_for @pupil, multipart: true do |f| %>
+<%= form_for @pupil, url: grade_pupils_path(@grade), multipart: true do |f| %>
   <% if @pupil.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@pupil.errors.count, "error") %> prohibited this pupil from being saved:</h2>
-
       <ul>
       <% @pupil.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,63 +10,46 @@
     </div>
   <% end %>
 
-
-  <div class="field">
-    <strong>ФИО</strong>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">ФИО</span>
     <%= f.text_field :fio, class: "form-control", placeholder: "Введите ФИО"%>
+    <span class="input-group-addon" id="basic-addon2">Иванов Иван Иванович</span>
   </div><br>
-  <div class="field">
-    <strong>Емайл</strong>
-    <%= f.text_field :email, class: "form-control", placeholder: "Введите емайл" %>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Email</span>
+    <%= f.text_field :email, class: "form-control", placeholder: "Введите email" %>
   </div><br>
-  <div class="field">
-    <strong>Адрес</strong>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Пароль</span>
+    <%= f.password_field :password, class: "form-control", placeholder: "Введите пароль"%>
+  </div><br>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Адрес</span>
     <%= f.text_field :address, class: "form-control", placeholder: "Введите адрес" %>
   </div><br>
-  <div class="field">
-    <strong>Дата рожденья</strong>
-    <%= f.text_field :birthdate, class: "form-control", placeholder: "Введите дату рожденья" %>
-  </div><br>
-  <div class="field">
-    <strong>Пол</strong>
-    <%= f.text_field :gender, class: "form-control", placeholder: "Выберите пол" %>селектор
-  </div><br>
-  <div class="field">
-    <strong>Телефон</strong>
-    <%= f.text_field :phone, class: "form-control", placeholder: "Введите телефон" %>
-  </div><br>
-    <div class="field">
-    <strong>Класс</strong>
-    <%= f.text_field :grade_id, class: "form-control", placeholder: "Выберите класс" %> селектор
-  </div><br>
-  <div class="field">
-    <strong>Тип</strong>
-    <%= f.text_field :type, class: "form-control", placeholder: "ыва" %> должно уже быть выбрано
-  </div><br>
-  <div class="field">
-    <strong>Роль</strong>
-    <%= f.text_field :role, class: "form-control", placeholder: "ыва" %> должно уже быть выбрано
-  </div><br>
-  <div class="field">
-    <strong>Родитель</strong>
-    <%= f.text_field :parent_id, class: "form-control", placeholder: "ыва" %> хз
+
+  <div class='input-group date' id='datetimepicker2'>
+    <span class="input-group-addon" id="basic-addon1">Дата рождения</span>
+    <%= f.text_field :birthdate, class: "form-control datepicker", placeholder: "Введите дату рожденья" %>
+
+        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+
   </div><br>
 
-
-
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Пол</span>
+    <%= f.select :gender, [["Male", :male], ["Female", :female]], {}, {class: "form-control"}%>
+  </div><br>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Телефон</span>
+    <%= f.phone_field :phone, class: "form-control", placeholder: "Введите телефон" %>
+  </div><br>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Родитель</span>
+    <%= f.select :parent_id, Parent.all.map{|u| ["#{u.email}, #{u.fio}", u.id]}, {}, {class: "form-control"}%>
+  </div><br>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
-
-    t.string   "email"
-    t.string   "fio"
-    t.string   "address"
-    t.date     "birthdate"
-    t.integer  "gender"
-    t.string   "phone"
-    t.integer  "grade_id"
-    t.string   "type"
-    t.integer  "role"
-    t.integer  "parent_id"

@@ -12,18 +12,20 @@
 
   <tbody>
     <% @orders.each do |order| %>
+    <% if order.paid? %>
       <tr>
         <td><%= order.id %></td>
-        <td><% if order.paid? %>
-            Оплачено
-            <% end %>
-           <% if order.cart? %>
-            Не подтверждено
-          <% end %></td>
-        <td><%= link_to 'Открыть', order_path(order), class: 'btn btn-primary' %></td>
-        <td>
-          <%= link_to 'Удалить', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-      </tr>
+          <td><% if order.paid? %>
+              Оплачено
+              <% end %>
+             <% if order.cart? %>
+              Не подтверждено
+            <% end %></td>
+          <td><%= link_to 'Открыть', order_path(order), class: 'btn btn-primary' %></td>
+          <td>
+            <%= link_to 'Удалить', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

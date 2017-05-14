@@ -7,13 +7,27 @@ class GradesController < ApplicationController
 
   def show
     @grade = Grade.find(params[:id])
-    @pupils = Pupil.where(grade_id: @grade)
+    #@pupils = Pupil.where(grade_id: @grade)
 
-    @pupils = Pupil.order(params[:iluha])
+    @pupils = Pupil.order(params[:iluha]).where.not(longitude: nil).where(grade_id: @grade)
     @hash = Gmaps4rails.build_markers(@pupils) do |pupil, marker|
       marker.lat pupil.latitude
       marker.lng pupil.longitude
       marker.infowindow pupil.fio + " , " + pupil.address
+      if pupil.latitude >= 53.1881658
+      marker.picture({
+                            :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                            :width => 32,
+                            :height => 32
+                            })
+      else
+      marker.picture({
+                          :url => "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                          :width => 32,
+                          :height => 32
+                          })
+
+      end
     end
 
   end

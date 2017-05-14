@@ -11,7 +11,7 @@ class Order < ApplicationRecord
     update(status: :paid)
   end
 
-  def calculate_total_price
+  def total_price
     result = 0
     line_items.each do |line_item|
       result += line_item.total_price

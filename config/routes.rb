@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   #end
 
   root 'application#index'
-  resources :grades
-  resources :pupils
+  resources :grades do
+    resources :pupils
+  end
 
   scope module: :subject do
     resources :scores

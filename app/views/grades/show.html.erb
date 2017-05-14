@@ -40,23 +40,34 @@
 
   <tbody>
     <% @pupils.each do |pupil| %>
-      <tr>
-        <td><%= link_to pupil.fio, pupil_path(pupil) %></td>
-        <td><%= pupil.email %></td>
-        <td><%= Parent.find(pupil.parent_id).fio %></td>
-
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            <td>
-            <%= link_to 'Редактировать', edit_pupil_path(pupil), class: 'btn btn-primary btn-sm' %>
-
-            </td>
+      <% if pupil.grade_id == @grade.id %>
+        <tr>
+          <td><%= link_to pupil.fio, grade_pupil_path(@grade, pupil) %></td>
+          <td><%= pupil.email %></td>
+          <% if pupil.parent_id? %>
+            <td><%= Parent.find(pupil.parent_id).fio %></td>
+          <% else %>
+          <td>Не привязан</td>
           <% end %>
-        <% end %>
-      </tr>
+
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <td>
+              <%= link_to 'Редактировать', edit_grade_pupil_path(@grade, pupil), class: 'btn btn-primary btn-sm' %>
+              </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
+
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to 'Добавить ученика', new_grade_pupil_path(@grade.id), class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
 
 <% if user_signed_in? %>
     <% if current_user.admin? %>
@@ -65,8 +76,8 @@
   <%end%>
 <%= link_to 'Назад', grades_path %>
 
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+<div style='width: 100%;'>
+  <div id="map" style='width: auto; height: 400px;'></div>
 </div>
 
 <script type="text/javascript">

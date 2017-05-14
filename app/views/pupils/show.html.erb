@@ -3,55 +3,62 @@
 <p>
   <h1><%= @pupil.fio %></h1>
 </p>
-
-<p>
-  <strong>Родитель:</strong>
-  <%= Parent.find(@pupil.parent_id).fio %>
-</p>
-
-<div class="col-xs-8">
+<div>
+  <p>
+    <strong>Родитель:</strong>
+    <% if @parent != nil %>
+      <%= Parent.find(@parent.id).fio %>
+    <% else %>
+      Не привязан
+    <% end %>
+  </p>
   <p>
     <strong>Класс</strong>
     <%= Grade.find(@pupil.grade_id).name %>
   </p>
+  <p>
+    <strong>Email</strong>
+    <%= @pupil.email %>
+  </p>
+  <p>
+    <strong>Адрес</strong>
+    <%= @pupil.address %>
+  </p>
+  <p>
+    <strong>Дата рождения</strong>
+    <%= @pupil.birthdate %>
+  </p>
+  <p>
+    <strong>Пол</strong>
+    <%= @pupil.gender %>
+  </p>
+  <p>
+    <strong>Телефон</strong>
+    <%= @pupil.phone %>
+  </p>
 </div>
 
-<h2>Предметы</h2>
-
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th><%= link_to 'Название', grades_path(iluha: :fio) %></th>
-      <% if user_signed_in? %>
-        <th></th>
-      <% end %>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @subject_scores.each do |subject_score| %>
-      <tr>
-        <td><%= link_to subject_score.name, subject_path(subject_score) %></td>
-
-
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            <td><%= link_to 'Редактировать', edit_subject_score_path(subject_score), class: 'btn btn-primary btn-sm' %><br>
-
-            <br>
-              <%= link_to 'Удалить', subject_score, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </td>
+<div class="panel panel-default">
+  <div class="panel-heading">Предметы будут с оценками</div>
+  <div class="panel-body">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th><%= link_to 'Название', grades_path(iluha: :fio) %></th>
+          <% if user_signed_in? %>
+            <th></th>
           <% end %>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+
+</div>
 
 <% if user_signed_in? %>
     <% if current_user.admin? %>
-      <%= link_to 'Редактировать', edit_pupil_path(@pupil) %>
+      <%= link_to 'Редактировать', edit_grade_pupil_path(@grade, @pupil) %>
     <%end%>
   <%end%>
 <%= link_to 'Назад', grade_path(@pupil.grade_id) %>

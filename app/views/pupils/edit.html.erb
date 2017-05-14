@@ -2,5 +2,5 @@
 
 <%= render 'form', pipil: @pupil %>
 
-<%= link_to 'Показать', @pupil %> |
+<%= link_to 'Показать', edit_grade_pupil_path(@grade, @pupil) %> |
 <%= link_to 'Назад', grades_path %>

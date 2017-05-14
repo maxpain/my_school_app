@@ -8,9 +8,9 @@
     </li>
   <% end %>
 
-   <%if (current_order.calculate_total_price != 0)%>
+   <%if (current_order.total_price != 0)%>
   Итого:
-  <%=current_order.calculate_total_price%>
+  <%=current_order.total_price%>
   <br/>
   <%= link_to 'Закончить чек', close_current_order_path(@order), class: 'btn btn-primary' %>
   <%= link_to 'Очистить', destroy_all_line_items_path, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

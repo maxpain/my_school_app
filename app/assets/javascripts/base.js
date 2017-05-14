@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function(e) {
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
       } else {
-          console.log('ХУЕЦ');
+          console.log('1');
       }
   }
   function showPosition(position) {
@@ -17,4 +17,6 @@ $(document).on('turbolinks:load', function(e) {
         }
       })
   }
+
+  $('#datetimepicker2').datetimepicker({locale: 'ru'})
 })
