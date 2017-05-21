@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :pupils
   end
 
+
   scope module: :subject do
     resources :scores
   end

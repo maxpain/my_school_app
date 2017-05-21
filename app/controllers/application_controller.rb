@@ -18,11 +18,44 @@ class ApplicationController < ActionController::Base
 
   def index
     @pupils = Pupil.where.not(currentlongitude: nil)
+    @coords = [{:latitude => 53.1881658,:longitude => 44.97538}, #верх прав
+               {:latitude => 53.1841658,:longitude => 44.97538}, #ниж прав
+               {:latitude => 53.1881658,:longitude => 44.96738}, #верх лев
+               {:latitude => 53.1841658,:longitude => 44.96738}] #ниж лев
     @hash = Gmaps4rails.build_markers(@pupils) do |pupil, marker|
-        marker.lat pupil.currentlatitude
-        marker.lng pupil.currentlongitude
-        marker.infowindow pupil.fio
+      marker.lat pupil.currentlatitude
+      marker.lng pupil.currentlongitude
+      marker.infowindow pupil.fio
+      if pupil.currentlatitude <= 53.1881658 &&
+         pupil.currentlatitude >= 53.1841658 &&
+         pupil.currentlongitude <= 44.97538 &&
+         pupil.currentlongitude >= 44.96738
+      marker.picture({
+                      :url => "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                      :width => 32,
+                      :height => 32
+                      })
+      else
+      marker.picture({
+                      :url => "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                      :width => 32,
+                      :height => 32
+                      })
+
       end
+    end
+
+    @hash1 = Gmaps4rails.build_markers(@coords) do |coord, marker|
+      marker.lat coord[:latitude]
+      marker.lng coord[:longitude]
+      marker.picture({
+                      :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                      :width => 32,
+                      :height => 32
+                      })
+      end
+
+
   end
 
   private
