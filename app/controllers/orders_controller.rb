@@ -24,22 +24,11 @@ class OrdersController < ApplicationController
 
   def close
     @order = Order.find(params[:id])
-    if @order.paid!#(send_to_user_params)
+    if @order.verificated? && @order.verificated? && @order.paid!#(send_to_user_params)
+      session[:current_order] = nil
       flash[:notice] = 'Заказ выполняется'
     else
-      flash[:alert] = 'Не удалось подтвердить начало выполнения'
-    end
-    redirect_to orders_path
-  end
-
-
-  def close_current
-    @order = current_order
-    if @order.paid!#(send_to_user_params)
-      session[:current_order] = nil
-      flash[:notice] = 'Товары отправлены'
-    else
-      flash[:alert] = 'Не удалось отправить товары'
+      flash[:alert] = 'Заказ не подтвержден!'
     end
     redirect_to products_path
   end

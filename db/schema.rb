@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511130617) do
+ActiveRecord::Schema.define(version: 20170524172412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,8 +50,12 @@ ActiveRecord::Schema.define(version: 20170511130617) do
     t.float    "total_price"
     t.integer  "status"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "customer_id"
+    t.datetime "verification_sent_at"
+    t.datetime "verificated_at"
+    t.string   "verification_code"
   end
 
   create_table "products", force: :cascade do |t|
@@ -113,6 +117,7 @@ ActiveRecord::Schema.define(version: 20170511130617) do
     t.float    "longitude"
     t.float    "currentlatitude"
     t.float    "currentlongitude"
+    t.float    "account"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

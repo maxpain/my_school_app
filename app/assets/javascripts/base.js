@@ -19,4 +19,14 @@ $(document).on('turbolinks:load', function(e) {
   }
 
   $('#datetimepicker2').datetimepicker({locale: 'ru'})
+
+  $('.selectpicker').selectpicker({
+    liveSearch: true
+  });
+})
+
+$(document).on('click', '.cancel-order-verification', function(e) {
+  e.preventDefault();
+  $('.order-confirmation-form').show();
+  $('.order-verification-form').hide();
 })

@@ -8,14 +8,37 @@
     </li>
   <% end %>
 
-   <%if (current_order.total_price != 0)%>
-  Итого:
-  <%=current_order.total_price%>
-  <br/>
-  <%= link_to 'Закончить чек', close_current_order_path(@order), class: 'btn btn-primary' %>
-  <%= link_to 'Очистить', destroy_all_line_items_path, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% if (current_order.total_price != 0) %>
+    Итого:
+    <%=current_order.total_price%>
+    <br/>
+
+    <%= form_for @order, url: order_verifications_path(@order), remote: true, method: :post, html: { class: 'order-confirmation-form', style: ('display: none;' if @order.verification_sent_at || @order.verificated?) } do |f| %>
+
+      <%= f.select :customer_id, option_groups_from_collection_for_select(Grade.all, :pupils, :name, :id, :fio), {}, class: 'selectpicker' %>
+
+      <%= f.submit 'Huec', class: 'btn' %>
+
+    <% end %>
+
+    <%= form_for @order, url: order_verifications_path(@order), remote: true, method: :patch, html: { class: 'order-verification-form', style: ('display: none;' if !@order.verification_sent_at || @order.verificated?) } do |f| %>
+
+      <%= text_field_tag :verification_code %>
+
+      <%= link_to 'Выбрать другого ученика', '#', class: 'cancel-order-verification' %>
+
+      <%= f.submit 'Huec2', class: 'btn' %>
+
+    <% end %>
+
+    <br/>
+    <%= link_to 'Закончить чек', close_order_path(@order), class: 'btn btn-primary' %>
+
+    <%= link_to 'Очистить', destroy_all_line_items_path, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
+
   <%else%>
-  Корзина пуста
+    Корзина пуста
   <% end %>
 
 

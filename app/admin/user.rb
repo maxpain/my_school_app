@@ -1,7 +1,8 @@
 ActiveAdmin.register User do
-  permit_params :fio, :birthdate, :gender, :address, :email, :phone, :role, :currentlatitude, :currentlongitude
+  permit_params :id, :fio, :birthdate, :gender, :address, :email, :phone, :role, :currentlatitude, :currentlongitude
 
 index do
+    column :id
     column :fio
     column :birthdate
     column :gender

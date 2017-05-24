@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   #devise_scope :user do
   #   get '/users/sign_out' => 'devise/sessions#destroy'
   #end
-
+  get 'persons/profile'
   root 'application#index'
   resources :grades do
     resources :pupils
@@ -23,9 +23,10 @@ Rails.application.routes.draw do
   end
 
   resources :orders do
-    member do
-      get :close
-      get :close_current
+    get :close, on: :member
+
+    scope module: :orders do
+      resource :verifications, only: [:create, :update]
     end
   end
 

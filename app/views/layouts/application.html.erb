@@ -41,7 +41,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <p class="navbar-text">
-            Вы вошли как <%= link_to current_user.email, root_path %>
+            Вы вошли как <%= link_to current_user.email,  persons_profile_path %>
           </p>
           <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
         <% else %>
