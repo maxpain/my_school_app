@@ -17,7 +17,7 @@
 
       <%= f.select :customer_id, option_groups_from_collection_for_select(Grade.all, :pupils, :name, :id, :fio), {}, class: 'selectpicker' %>
 
-      <%= f.submit 'Huec', class: 'btn' %>
+      <%= f.submit 'Отправить подтверждение', class: 'btn btn-primary btn-block' %>
 
     <% end %>
 
@@ -27,7 +27,7 @@
 
       <%= link_to 'Выбрать другого ученика', '#', class: 'cancel-order-verification' %>
 
-      <%= f.submit 'Huec2', class: 'btn' %>
+      <%= f.submit 'Подтвердить', class: 'btn btn-primary btn-block' %>
 
     <% end %>
 

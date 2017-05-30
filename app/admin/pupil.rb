@@ -1,5 +1,5 @@
 ActiveAdmin.register Pupil do
-  permit_params :fio, :birthdate, :gender, :address, :phone, :email, :password, :grade_id, :parent_id, :latitude, :longitude
+  permit_params :fio, :birthdate, :gender, :address, :phone, :email, :password, :grade_id, :parent_id, :latitude, :longitude, :account
 
 index do
     column :fio
@@ -11,6 +11,7 @@ index do
     column :parent_id
     column :latitude
     column :longitude
+    column :account
     actions
   end
 

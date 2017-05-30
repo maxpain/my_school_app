@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
 
   def index
     if current_user.try(:admin?)
-      @orders = Order.all
+      @orders = Order.all.order(id: :desc)
     else
-      @orders = Order.where(user_id: current_user.try(:id))   #send_
+      @orders = Order.where(user_id: current_user.try(:id)).order(id: :desc)   #send_
     end
   end
 
@@ -12,19 +12,9 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  #def user_complete
-  #  @order = Order.find(params[:id])
-  #  if @order.complete!
-  #    flash[:notice] = 'Подтверждено'
-  #  else
-  #    flash[:alert] = 'Не удалось подтвердить'
-  #  end
-  #  redirect_to orders_path
-  #end
-
   def close
     @order = Order.find(params[:id])
-    if @order.verificated? && @order.verificated? && @order.paid!#(send_to_user_params)
+    if @order.verificated? && @order.verificated? && @order.paid!
       session[:current_order] = nil
       flash[:notice] = 'Заказ выполняется'
     else
@@ -48,5 +38,4 @@ class OrdersController < ApplicationController
     def send_to_user_params
       params.require(:order).permit(:user_id, :total_price, :status)
     end
-
 end

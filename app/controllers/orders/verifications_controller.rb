@@ -8,6 +8,11 @@ class Orders::VerificationsController < ApplicationController
 
   def update
     @response = @order.verify!(params[:verification_code])
+
+    if @order.paid?  #хзхзхз
+      @pupil = Pupil.all.find(@order.customer_id)
+      @pupil.account -= @order.total_price
+    end
   end
 
   private
