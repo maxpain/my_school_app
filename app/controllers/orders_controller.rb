@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       session[:current_order] = nil
       flash[:notice] = 'Заказ выполняется'
     else
-      flash[:alert] = 'Заказ не подтвержден!'
+      flash[:alert] = @order.errors.full_messages.first || 'Заказ не подтвержден!'
     end
     redirect_to products_path
   end

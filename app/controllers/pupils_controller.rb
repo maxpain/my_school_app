@@ -8,7 +8,11 @@ class PupilsController < ApplicationController
 
   def show
     @parent = Parent.find(@pupil.parent_id) if @pupil.parent_id?
-    #@subject_scores = Subject::Score.where(pupil_id: @pupil)
+    @subject_scores = @pupil.subject_scores.order(created_at: :desc)
+    @average_scores = @pupil.subject_scores.joins(:subject).
+                        select('subjects.id, subjects.name AS subject_name,
+                                AVG(subject_scores.value) AS average_value'
+                              ).group('subjects.id')
   end
 
   def new

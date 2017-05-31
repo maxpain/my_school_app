@@ -1,0 +1,36 @@
+<h1>Hello nigga</h1>
+
+<%= form_for @score, url: grade_pupil_scores_path(@grade, @pupil), multipart: true do |f| %>
+  <% if @score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@score.errors.count, "error") %> prohibited this subject_score from being saved:</h2>
+
+      <ul>
+      <% @score.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <strong>Предмет</strong>
+    <%= f.select :subject_id, Subject.all.map{|u| ["#{u.name}, #{u.id}", u.id]}, {}, {class: "form-control"}%>
+  </div><br>
+
+  <div class="field">
+    <strong>Оценка</strong>
+    <%= f.text_field :value, class: "form-control"%>
+  </div><br>
+
+  <div class="field">
+    <strong>Комментарий</strong>
+    <%= f.text_field :comment, class: "form-control"%>
+  </div><br>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

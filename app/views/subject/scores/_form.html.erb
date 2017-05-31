@@ -16,10 +16,7 @@
     <strong>Предмет</strong>
     <%= f.select(:grade_id, options_from_collection_for_select(Grade.all, :name), {}, {:class => 'form-control'}) %>
   </div><br>
-  <div class="field">
-    <strong>Руководитель</strong>
-    <%= f.select(:teacher_id, options_from_collection_for_select(Teacher.all, :id, :fio), {}, {:class => 'form-control'}) %>
-  </div><br>
+
 
   <div class="actions">
     <%= f.submit %>

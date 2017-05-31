@@ -9,7 +9,13 @@ class Order < ApplicationRecord
   enum status: [:cart, :paid]
 
   def paid!
-    update(status: :paid)
+    if customer.account > total_price
+      update(status: :paid)
+      customer.update(account: customer.account - total_price)
+    else
+      errors.add(:base, 'Хуй соси бабла нет')
+      return false
+    end
   end
 
   def total_price

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'persons/profile'
   root 'application#index'
   resources :grades do
-    resources :pupils
+    resources :pupils do
+      resources :scores
+    end
   end
 
 

@@ -36,24 +36,96 @@
     <strong>Телефон</strong>
     <%= @pupil.phone %>
   </p>
+  <p>
+    <strong>Средняя оценка по предметам</strong>
+    <%= @subject_scores.average(:value) %>
+  </p>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">Предметы будут с оценками</div>
-  <div class="panel-body">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th><%= link_to 'Название', grades_path(iluha: :fio) %></th>
-          <% if user_signed_in? %>
-            <th></th>
-          <% end %>
-        </tr>
-      </thead>
-    </table>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Поставить оценку</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Поставить оценку</h4>
+      </div>
+      <%= form_for @pupil.subject_scores.new, url: grade_pupil_scores_path(@grade, @pupil), multipart: true do |f| %>
+        <div class="modal-body">
+          <div class="field">
+            <strong>Предмет</strong>
+            <%= f.select :subject_id, Subject.all.map{|u| ["#{u.name}, #{u.id}", u.id]}, {}, {class: "form-control"}%>
+          </div><br>
+
+          <div class="field">
+            <strong>Оценка</strong>
+            <%= f.text_field :value, class: "form-control"%>
+          </div><br>
+
+          <div class="field">
+            <strong>Комментарий</strong>
+            <%= f.text_area :comment, class: "form-control"%>
+          </div><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          <%= f.submit 'ОК', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
+<br><br>
 
+<div class="panel with-nav-tabs panel-default">
+  <div class="panel-heading">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#scores" aria-controls="home" role="tab" data-toggle="tab">Последние оценки</a></li>
+      <li role="presentation"><a href="#average-scores" aria-controls="tab" role="tab" data-toggle="tab">Средние оценки по предметам</a></li>
+    </ul>
+  </div>
+  <div class="panel-body">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="scores">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th><%= link_to 'Предмет', grades_path(iluha: :fio) %></th>
+              <th><%= link_to 'Оценка', grades_path(iluha: :fio) %></th>
+              <th><%= link_to 'Дата', grades_path(iluha: :fio) %></th>
+              <th><%= link_to 'Комментарий', grades_path(iluha: :fio) %></th>
+            </tr>
+            <% @subject_scores.each do |score| %>
+              <tr>
+                <td><%= score.subject.name %></td>
+                <td><%= score.value %></td>
+                <td><%= l(score.created_at, format: :long) %></td>
+                <td><%= score.comment %></td>
+              </tr>
+            <% end %>
+          </thead>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="average-scores">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th><%= link_to 'Предмет', grades_path(iluha: :fio) %></th>
+              <th><%= link_to 'Средняя оценка', grades_path(iluha: :fio) %></th>
+            </tr>
+            <% @average_scores.each do |score| %>
+              <tr>
+                <td><%= score.subject_name %></td>
+                <td><%= score.average_value %></td>
+              </tr>
+            <% end %>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% if user_signed_in? %>
