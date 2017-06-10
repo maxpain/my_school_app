@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   root 'application#index'
   resources :grades do
     resources :pupils do
-      resources :scores
+      resources :scores, :truancies
     end
   end
+
 
 
   scope module: :subject do
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
   end
 
   resource :geolocations, only: :update
+
+  resource :truancies
 
   get 'send_items/send_items'
 

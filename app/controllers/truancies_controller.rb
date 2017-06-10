@@ -1,12 +1,12 @@
-class ScoresController < ApplicationController
+class TruanciesController < ApplicationController
   before_action :find_grade, :find_pupil
 
   def create
-    @score = @pupil.subject_scores.new(permitted_params.merge(teacher_id: current_user.id))
-    if @score.save
+    @truancy = @pupil.truancies.new(permitted_params.merge(pupil_id: @pupil.id, check: true))
+    if @truancy.save
       flash[:notice] = 'Успешно'
     else
-      flash[:alert] = @score.errors.full_messages.first
+      flash[:alert] = @truancy.errors.full_messages.first
     end
     redirect_to grade_pupil_path(@grade, @pupil)
   end
@@ -22,6 +22,6 @@ class ScoresController < ApplicationController
   end
 
   def permitted_params
-    params.require(:subject_score).permit(:subject_id, :value, :comment)
+    params.require(:truancy).permit(:pupil_id, :check, :reason)
   end
 end

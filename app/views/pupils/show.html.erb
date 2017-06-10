@@ -42,13 +42,15 @@
   </p>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Поставить оценку</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Поставить оценку</button>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Поставить пропуск</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mylarlModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="gridSystemModalLabel">Поставить оценку</h4>
       </div>
       <%= form_for @pupil.subject_scores.new, url: grade_pupil_scores_path(@grade, @pupil), multipart: true do |f| %>
@@ -69,6 +71,30 @@
           </div><br>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal1">Закрыть</button>
+          <%= f.submit 'ОК', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Поставить пропуск</h4>
+      </div>
+      <%= form_for @pupil.truancies.new, url: grade_pupil_truancies_path(@grade, @pupil), multipart: true do |f| %>
+        <div class="modal-body">
+
+          <div class="field">
+            <strong>Причина отсутствия</strong>
+            <%= f.text_area :reason, class: "form-control"%>
+          </div><br>
+        </div>
+        <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
           <%= f.submit 'ОК', class: 'btn btn-primary' %>
         </div>
@@ -84,6 +110,7 @@
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#scores" aria-controls="home" role="tab" data-toggle="tab">Последние оценки</a></li>
       <li role="presentation"><a href="#average-scores" aria-controls="tab" role="tab" data-toggle="tab">Средние оценки по предметам</a></li>
+      <li role="presentation"><a href="#truancies" aria-controls="tab" role="tab" data-toggle="tab">Пропуски</a></li>
     </ul>
   </div>
   <div class="panel-body">
@@ -119,6 +146,20 @@
               <tr>
                 <td><%= score.subject_name %></td>
                 <td><%= score.average_value %></td>
+              </tr>
+            <% end %>
+          </thead>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="truancies">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th><%= link_to 'Дата пропуска', grades_path(iluha: :fio) %></th>
+            </tr>
+            <% @pupil.truancies.each do |truance| %>
+              <tr>
+                <td><%= truance.created_at %></td>
               </tr>
             <% end %>
           </thead>

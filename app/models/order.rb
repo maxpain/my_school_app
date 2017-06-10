@@ -13,7 +13,7 @@ class Order < ApplicationRecord
       update(status: :paid)
       customer.update(account: customer.account - total_price)
     else
-      errors.add(:base, 'Хуй соси бабла нет')
+      errors.add(:base, 'Недостаточно денег на счете, пополните пожалуйста баланс или не ешьте')
       return false
     end
   end
